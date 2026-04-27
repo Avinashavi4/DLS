@@ -1,0 +1,30 @@
+<title>MyBook</title>
+<meta name="application-name" content="MyBook" />
+<style>
+  [aria-label='About Storybook'],
+  [aria-label='Shortcuts'],
+  [title='Shortcuts'],
+  a[href*='storybook.js.org'],
+  a[href*='chromatic.com'],
+  a[href*='github.com/storybookjs'] {
+    display: none !important;
+  }
+</style>
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    const removeStorybookDialogs = () => {
+      document.querySelectorAll('[role="dialog"]').forEach((dialog) => {
+        const text = dialog.textContent || '';
+        if (text.includes('Storybook') || text.includes('Chromatic')) {
+          dialog.remove();
+        }
+      });
+    };
+
+    removeStorybookDialogs();
+    new MutationObserver(removeStorybookDialogs).observe(document.body, {
+      childList: true,
+      subtree: true,
+    });
+  });
+</script>

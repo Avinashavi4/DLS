@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+# Amex DLS — pre-commit gate.
+# Lint + format staged files, then typecheck and run the unit suite.
+# Skipping (--no-verify) is reserved for genuine emergencies.
+
+npx lint-staged || exit 1
+npm run typecheck || exit 1
+npm test || exit 1
